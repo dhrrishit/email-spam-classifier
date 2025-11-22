@@ -1,6 +1,6 @@
 # 🛡️ Spam Detector AI – Project Documentation
 
-A complete machine-learning based SMS classification system that identifies messages as **Spam** or **Ham** using NLP preprocessing, TF-IDF vectorization, and a trained Support Vector Machine (SVM) model. This README is generated entirely based on your *actual project files*.
+A complete machine-learning based SMS classification system that identifies messages as **Spam** or **Ham** using NLP preprocessing, TF-IDF vectorization, and a trained Support Vector Machine (SVM) model.
 
 ---
 
