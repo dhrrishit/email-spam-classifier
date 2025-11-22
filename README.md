@@ -1,103 +1,101 @@
-# 📦 Smart Spam Classifier – Refactored Project Structure (Aligned with DD Bank Style)
+# 🛡️ Spam Detector AI – Project Documentation
 
-This document contains the **fully rewritten and reorganized structure** for the *Smart Spam Classifier* project, now made consistent with the style, depth, and format of the **DD Bank Management System** project.
-
----
-
-# 🧠 Smart Spam Classifier – Machine Learning SMS/Email Filtering System
-
-A clean, professional, fully structured ML project designed to classify messages as **Spam** or **Ham** using NLP + SVM. This version follows the **DD Bank documentation style** with a strict project structure, clarity, and modular organization.
+A complete machine-learning based SMS classification system that identifies messages as **Spam** or **Ham** using NLP preprocessing, TF-IDF vectorization, and a trained Support Vector Machine (SVM) model. This README is generated entirely based on your *actual project files*.
 
 ---
 
 ## 📌 Overview
 
-The Smart Spam Classifier uses Natural Language Processing (NLP) and Support Vector Machine (SVM) models to identify whether a message is spam. This refactored version includes:
+This project provides a clean, modular, production-grade spam detection system:
 
-* Proper folder hierarchy
-* Modular Python files
-* A clean "src" directory like DD Bank
-* JSON/log-based history storage
-* Streamlit UI moved into dedicated module
-* Testing folder and docs folder added
-* Full professional README structure
+* A **Streamlit UI** for real-time predictions
+* A full **NLP preprocessing pipeline**
+* An **SVM model** wrapped in a scikit-learn pipeline
+* **Analytics** such as pie-charts and word clouds
+* **History logging** for previous queries
+* **Unit tests** for preprocessing and model prediction
+
+The system automatically trains itself if the model file is missing.
 
 ---
 
 ## ✨ Features
 
-### **1. Real-Time Message Classification**
+### **1. Real-Time Classification**
 
-* Users can input SMS or email text
-* Model predicts **Spam** or **Ham** instantly
-* Confidence score displayed
+* Input email/SMS text and receive instant **Spam (1)** or **Ham (0)** predictions
+* Displays a probability-based **confidence score**
+* Beautiful gradient-themed UI with animations and custom CSS
+* Automatically logs predictions to `history.csv` fileciteturn1file4
 
-### **2. Dataset Insights Dashboard**
+### **2. NLP Preprocessing**
 
-* Spam/Ham distribution
-* WordClouds for spam keywords
-* Frequency charts
+Implemented in `preprocessing.py` fileciteturn1file6:
 
-### **3. User Query History (JSON-based)**
+* Lowercasing
+* Word tokenization
+* Alphanumeric filtering
+* Stopword removal
+* Punctuation removal
+* Stemming using Porter Stemmer
 
-* Stores recent classifications
-* Auto-generates timestamps
+### **3. Model Training and Prediction**
 
-### **4. Model Pipeline**
+Found in `model.py` fileciteturn1file5:
 
-* Text cleaning (NLTK)
-* TF-IDF vectorizer
-* SVM classifier
-* Modular ML pipeline like `bank_management.py` structure
+* Loads SMS dataset from `data/spam.csv`
+* Maps labels (ham → 0, spam → 1)
+* Creates `transformed_text` using the preprocessing pipeline
+* Splits dataset into train/test
+* Uses a **TF-IDF + SVM (sigmoid kernel)** pipeline
+* Trains model and saves it to `model.pkl`
+* Provides a simple `predict_message()` interface
 
-### **5. Premium UI**
+### **4. Analytics Dashboard**
 
-* Built with Streamlit
-* Dark + Light modes
-* Clean minimal layout
+Implemented in `analytics.py` fileciteturn1file2:
 
----
+* Pie-chart of spam/ham distribution
+* Word cloud of most common spam words
+* Frequency table of top 30 words
 
-## 🏗️ Technologies Used
+### **5. Query History System**
 
-* **Python 3**
-* **Scikit-learn** (ML model)
-* **NLTK** (NLP preprocessing)
-* **Streamlit** (UI)
-* **Pandas & NumPy**
-* **Matplotlib & WordCloud** (visualizations)
-* **JSON** (for storing query history)
+Implemented in `history.py` fileciteturn1file4:
+
+* Saves every prediction with timestamp, message, confidence
+* Loads and sorts history for the UI table
+
+### **6. Unit Tests**
+
+Tests located in the `tests/` directory:
+
+* `test_model.py` validates spam/ham predictions based on example inputs fileciteturn1file0
+* `test_preprocessing.py` checks cleaning logic and token transformation behavior fileciteturn1file1
 
 ---
 
 ## 📂 Project Structure
 
 ```
-smart-spam-classifier/
-├── src/
-│   ├── app.py                 # Main Streamlit app
-│   ├── classifier.py          # Model loading, prediction functions
-│   ├── preprocessing.py       # Text cleaning, NLP pipeline
-│   ├── train_model.py         # Script to train & save SVM model
-│   ├── visuals.py             # Dashboard charts + wordclouds
-│   ├── history_manager.py     # JSON-based log/history system
-│   └── utils.py               # Helper utilities
-│
-├── models/
-│   └── svm_model.pkl
-│
+VITYARTHIPROJECT/
 ├── data/
-│   ├── spam.csv               # Dataset
-│   └── history.json           # User logs
+│   └── spam.csv
+│
+├── src/
+│   ├── analytics.py
+│   ├── app.py
+│   ├── history.py
+│   ├── model.py
+│   └── preprocessing.py
 │
 ├── tests/
-│   ├── test_classifier.py
-│   ├── test_preprocessing.py
-│   └── test_history.py
+│   ├── __init__.py
+│   ├── test_model.py
+│   └── test_preprocessing.py
 │
-├── docs/
-│   └── report.pdf             # To be added later (parallel to DD Bank)
-│
+├── model.pkl           # auto-created after training
+├── history.csv         # auto-created after predictions
 ├── README.md
 ├── requirements.txt
 └── statement.md
@@ -105,61 +103,62 @@ smart-spam-classifier/
 
 ---
 
-## ⚙️ Installation & Running the Project
+## 🚀 Running the Application
 
-### **1. Clone the Repository**
+### **1. Install Dependencies**
 
-```
-git clone <repo-url>
-cd smart-spam-classifier
-```
-
-### **2. Install Dependencies**
-
-```
+```bash
 pip install -r requirements.txt
 ```
 
-### **3. Run the App**
+### **2. Launch the Streamlit App**
 
-```
+```bash
 streamlit run src/app.py
 ```
 
+The app will auto-train a model if `model.pkl` is missing.
+
 ---
 
-## 📊 Testing Instructions
+## 🧪 Running Tests
 
-Test individual modules using:
+Run all tests:
 
-```
+```bash
 python -m unittest discover tests
 ```
 
-You can manually test:
-
-* Entering long spam messages
-* Testing random ham messages
-* Changing inputs rapidly
-* Checking JSON logs
+Covers preprocessing and spam prediction logic.
 
 ---
 
-## 📸 Screenshots (Optional Future Section)
+## 📊 Dataset
 
-* Dashboard view
-* Classification UI
-* WordClouds
-* History JSON preview
+The project uses the classic SMS Spam Collection dataset (`spam.csv`).
+
+Columns used:
+
+* `label` (ham/spam)
+* `text` (SMS message)
 
 ---
 
-## 👤 Author
+## 🔮 Future Improvements
 
-**Name:** Dhrrishit V. Deka
+* Add BERT-based classifier
+* Mobile-responsive Streamlit layout
+* Multilingual spam support
+* Sender-ID analysis
+
+---
+
+## 👨‍💻 Developer
+
+**Dhrrishit V. Deka** – VITYARTHI Project
 
 ---
 
 ## 📄 License
 
-This project is for academic and learning purposes.
+This project is for academic and educational use.
