@@ -144,15 +144,6 @@ Columns used:
 
 ---
 
-## 🔮 Future Improvements
-
-* Add BERT-based classifier
-* Mobile-responsive Streamlit layout
-* Multilingual spam support
-* Sender-ID analysis
-
----
-
 ## 👨‍💻 Developer
 
 **Dhrrishit V. Deka** – VITYARTHI Project
